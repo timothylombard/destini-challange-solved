@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'story_brain.dart';
-//TODO: Step 15 - Run the app and see if you can see the screen update with the first story. Delete this TODO if it looks as you expected.
 
 void main() => runApp(Destini());
 
@@ -51,8 +50,14 @@ class _StoryPageState extends State<StoryPage> {
                 flex: 2,
                 child: FlatButton(
                   onPressed: () {
-                    //Choice 1 made by user.
-                    //TODO: Step 18 - Call the nextStory() method from storyBrain and pass the number 1 as the choice made by the user.
+
+                    setState(() {
+                      storyBrain.report();
+                      //Choice 1 made by user.
+                      //TODO: Step 18 - Call the nextStory() method from storyBrain and pass the number 1 as the choice made by the user.
+                      storyBrain.nextStory(1);
+                    });
+
                   },
                   color: Colors.red,
                   child: Text(
@@ -71,11 +76,20 @@ class _StoryPageState extends State<StoryPage> {
                 flex: 2,
                 //TODO: Step 26 - Use a Flutter Visibility Widget to wrap this FlatButton.
                 //TODO: Step 28 - Set the "visible" property of the Visibility Widget to equal the output from the buttonShouldBeVisible() method in the storyBrain.
-                child: FlatButton(
+                  child: Visibility (
+                    visible: storyBrain.buttonShouldBeVisible(),
+
+                   child: FlatButton(
                   onPressed: () {
+                    setState(() {
+
+                    storyBrain.report();
                     //Choice 2 made by user.
                     //TODO: Step 19 - Call the nextStory() method from storyBrain and pass the number 2 as the choice made by the user.
+                    storyBrain.nextStory(2);
+                    });
                   },
+
                   color: Colors.blue,
                   child: Text(
                     //TODO: Step 14 - Use the storyBrain to get the text for choice 2.
@@ -86,10 +100,11 @@ class _StoryPageState extends State<StoryPage> {
                   ),
                 ),
               ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
+    )
     );
   }
 }
